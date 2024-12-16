@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIHSS e Contraindicações à Trombólise</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        /* Container das abas */
+        .tab-container {
+            display: flex;
+            border-bottom: 2px solid #1976D2;
+        }
+
+        /* Estilização das abas */
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-bottom: none;
+            background-color: #e0e0e0;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .tab:hover {
+            background-color: #d0d0d0;
+        }
+
+        .tab.active {
+            background-color: #ffffff;
+            border-top: 2px solid #1976D2;
+        }
+
+        /* Conteúdo das abas */
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+    /* Estilo específico para a aba Lista de Contraindicações */
+    /* Caixa para cada seção */
+    .contra-box {
+        background-color: #ffffff; /* Fundo branco */
+        border: 1px solid #ddd; /* Borda cinza clara */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra leve */
+        padding: 15px; /* Espaçamento interno */
+        margin-bottom: 20px; /* Espaçamento entre as caixas */
+        border-radius: none; /* Bordas arredondadas */
+    }
+
+    /* Estilo dos títulos dentro das caixas */
+    .contra-box h3 {
+            color: #000;
+            margin-top: 0;
+            border-bottom: 2px solid #20558A;
+            padding-bottom: 10px;
+        }
+
+    /* Estilo dos textos dentro das caixas */
+    .contra-box ul {
+        list-style-type: disc; /* Marcadores circulares */
+        padding-left: 20px; /* Espaçamento dos marcadores */
+    }
+
+    .contra-box li {
+        margin-bottom: 8px; /* Espaçamento entre os itens */
+    }
+
+        .score-box {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 5px 0;
+            cursor: pointer;
+            text-align: left;
+            background-color: #f9f9f9;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        /* Estilo ao passar o mouse */
+        .score-box:hover {
+            background-color: #e9e9e9;
+        }
+
+        /* Estilo para o botão selecionado */
+        .score-box.selected {
+            background-color: #f9f9f9;
+            border-color: #00b300;    /* Borda verde escuro */
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Navegação das Abas -->
+    <div class="tab-container">
+        <div class="tab active" onclick="openTab('tab1')">NIHSS</div>
+        <div class="tab" onclick="openTab('tab2')">Contraindicações</div>
+    </div>
+
+    <!-- Conteúdo da primeira aba -->
+    <div id="tab1" class="tab-content active">
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIHSS</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .header {
+            background-color: #1976D2;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 0;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .case-presentation, .patient-info {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 0px;
+            margin-bottom: 30px;
+            border-left: 5px solid #20558A;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .patient-info input {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            margin: 5px 0;
+            width: 100%;
+        }
+
+        .flex-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .small-input {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .nihss-item {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 0px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nihss-item h3 {
+            color: #000;
+            margin-top: 0;
+            border-bottom: 2px solid #20558A;
+            padding-bottom: 10px;
+        }
+
+        .clinical-example, .scoring-guide, .instruction-box {
+            background-color: #FAFAFA;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+
+        .instruction-box {
+            background-color: #E7F0F9;
+            border-left: 4px solid #20558A;
+        }
+
+        .total-score {
+            background-color: #1976D2;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.2em;
+        }
+        /* Estilo base para os botões */
+        .score-box {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 5px 0;
+            cursor: pointer;
+            text-align: left;
+            background-color: #f9f9f9;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        /* Estilo ao passar o mouse */
+        .score-box:hover {
+            background-color: #e9e9e9;
+        }
+
+        /* Estilo para o botão selecionado */
+        .score-box.selected {
+            background-color: #90ee90; /* Fundo verde claro */
+            border-color: #00b300;    /* Borda verde escuro */
+        }
+        
+    /* Mantém os botões com o mesmo layout no desktop e no mobile */
+    .button-container button {
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 0;
+        background-color: #20558A;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .button-container button:hover {
+        background-color: #0056b3;
+    }
+
+    /* Estilo específico para telas menores */
+    @media (max-width: 768px) {
+        .header-title img {
+            content: url('titulo-mobile.png'); /* Substitua pelo caminho da imagem para smartphones */
+        }
+
+        /* Ajusta os botões para ocupar toda a largura no mobile */
+        .button-container {
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .button-container button {
+            width: 100%; /* Botões ocupam toda a largura no mobile */
+        }
+    }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho da Escala -->
+    <div class="header-title">
+        <img src="titulo-desktop.png" alt="Título do Projeto" style="width: 100%; max-width: 1200px; height: auto;">
+    </div>
+
+    <!-- Identificação do Paciente -->
+    <div class="patient-info">
+        <h2>Identificação do Paciente</h2>
+        <div class="flex-container">
+            <div class="small-input">
+                <label for="nomePaciente">Nome:</label>
+                <input type="text" id="nomePaciente" placeholder="Nome do Paciente">
+            </div>
+            <div class="small-input">
+                <label for="prontuario">Prontuário:</label>
+                <input type="text" id="prontuario" placeholder="Número do Prontuário">
+            </div>
+        </div>
+        <div class="flex-container">
+            <div class="small-input">
+                <label for="dataNascimento">Data de Nascimento:</label>
+                <input type="date" id="dataNascimento" onchange="calculaIdade()">
+            </div>
+            <div class="small-input">
+                <label for="idade">Idade:</label>
+                <input type="text" id="idade" readonly>
+            </div>
+        </div>
+    </div>
+
+    <div class="patient-info">
+        <h2>Instruções</h2>
+        <p>Realize os testes seguindo as orientações de forma exata, conforme padronizado pela NIHSS, para aumentar a confiabilidade e a reprodutibilidade:</p>
+        <ul>
+            <li>Todos os itens da escala deverão ser pontuados.</li>
+            <li>Sempre preencha o item antes de seguir para o próximo.</li>
+            <li>Não retorne em itens anteriores para mudar pontuações já preenchidas.</li>
+            <li>Os itens deverão ser pontuados de forma independente do item anterior, com poucas exceções, que serão informadas quando for pertinente.</li>
+            <li>Caso algum dos itens seja "Não Testável" (NT), detalhe o motivo para tal. Apenas alguns dos itens da escala poderão ser NT.</li>
+            <li>Geralmente, é registrado o primeiro esforço do paciente, mesmo que os seguintes sejam melhores, para aumentar a reprodutibilidade da escala.</li>
+            <li>Pontue apenas o que o paciente faz, não o que julgar que ele é capaz de fazer.</li>
+            <li>Preencha cada item conforme o que for observado, mesmo que, inicialmente, aparente não fazer sentido.</li>
+            <li>Evite incentivar o paciente.</li>
+            <li>Inclua déficits provenientes de AVCs antigos na pontuação.</li>
+            <li>Caso algum item seja motivo de dúvida, evite atribuir pontuações extremas (mínimas ou máximas).</li>
+            <li>Ao final da escala, faça o somatório da pontuação e registre-a no formato padrão que será exibido.</li>
+        </ul>
+    </div>
+
+    <div class="button-container" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+        <button onclick="startTest()" class="start-button" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">Iniciar Teste</button>
+    </div>
+
+    <!-- NIHSS Avaliação - 1A e 1B -->
+    <div id="scoring-guide-1A" class="nihss-item">
+        <h3>1A. Nível de Consciência</h3>
+
+        <div class="instruction-box">
+            <strong>Instruções de Realização:</strong>
+            <p>Impressão geral durante a coleta da história, após resposta de duas ou três perguntas.</p>
+            <ul>
+                <li>Se necessário, faça estímulo vigoroso ou até mesmo doloroso.</li>
+                <li>Escolha um valor mesmo em pacientes intubados, com barreiras de linguagem ou trauma facial.</li>
+            </ul>
+        </div>
+
+        <div>
+            <div id="scoring-1A-0" class="score-box" onclick="selectScore('scoring-guide-1A', '0')">
+                <strong>0 = Acordado</strong>, mas responde corretamente.
+            </div>
+            <div id="scoring-1A-1" class="score-box" onclick="selectScore('scoring-guide-1A', '1')">
+                <strong>1 = Sonolento</strong>, mas acorda com um pequeno estímulo, obedece, responde ou reage.
+            </div>
+            <div id="scoring-1A-2" class="score-box" onclick="selectScore('scoring-guide-1A', '2')">
+                <strong>2 = Torporoso</strong>, acorda com estímulo forte, requer estimulação repetida ou dolorosa para realizar movimentos (não estereotipados).
+            </div>
+            <div id="scoring-1A-3" class="score-box" onclick="selectScore('scoring-guide-1A', '3')">
+                <strong>3 = Comatoso</strong>; apenas respostas reflexas motoras ou autonômicas, ou sem qualquer tipo de resposta.
+            </div>
+        </div>
+        <input type="hidden" id="selected-score-1A" name="selected-score-1A" value="">
+    </div>
+
+    <div id="scoring-guide-1B" class="nihss-item">
+        <h3>1B. Nível de Consciência: Perguntas</h3>
+
+        <div class="instruction-box">
+            <strong>Instruções de Realização:</strong>
+            <p>Pergunte a idade e o mês. As respostas devem ser <strong>exatas</strong>.</p>
+            <ul>
+                <li>Pacientes intubados, com barreiras de linguagem, disartria grave, trauma facial, doença severa ou qualquer outro motivo não relacionado à afasia devem receber 1 ponto.</li>
+                <li>Pontue 2 em pacientes comatosos que pontuaram 3 em 1A.</li>
+                <li>Pontue 2 em pacientes afásicos que não compreenderam a pergunta.</li>
+            </ul>
+        </div>
+
+        <div>
+            <div id="scoring-1B-0" class="score-box" onclick="selectScore('scoring-guide-1B', '0')">
+                0 = Responde <strong>ambas</strong> as perguntas corretamente.
+            </div>
+            <div id="scoring-1B-1" class="score-box" onclick="selectScore('scoring-guide-1B', '1')">
+                1 = Responde apenas <strong>uma</strong> pergunta corretamente.
+            </div>
+            <div id="scoring-1B-2" class="score-box" onclick="selectScore('scoring-guide-1B', '2')">
+                2 = Não responde <strong>nenhuma</strong> pergunta corretamente.
+            </div>
+        </div>
+        <input type="hidden" id="selected-score-1B" name="selected-score-1B" value="">
+    </div>
+
+    <!-- 1C: Nível de Consciência: Comandos -->
+    <div id="scoring-guide-1C" class="nihss-item">
+        <h3>1C. Nível de Consciência: Comandos</h3>
+
+        <div class="instruction-box">
+            <strong>Instruções de Realização:</strong>
+            <p>O paciente deve ser solicitado a abrir e fechar os olhos e, em seguida, abrir e fechar a mão que não apresenta paralisia.</p>
+            <ul>
+                <li>Substitua por outro comando de um único passo se as mãos não puderem ser utilizadas (ex.: "coloque a língua para fora").</li>
+                <li>Permitido repetir o comando uma vez e realizar gestos para fornecer estímulo visual, mas não encorajar o paciente.</li>
+                <li>Considere a tentativa da realização do comando, mesmo se a execução for incompleta.</li>
+                <li>Pontue apenas a primeira tentativa.</li>
+            </ul>
+        </div>
+
+        <h4>Critérios de Avaliação:</h4>
+        <div>
+            <div id="scoring-1C-0" class="score-box" onclick="selectScore('scoring-guide-1C', '0')">
+                0 = Realiza <strong>ambas</strong> as tarefas corretamente.</strong>
+            </div>
+            <div id="scoring-1C-1" class="score-box" onclick="selectScore('scoring-guide-1C', '1')">
+                1 = Realiza <strong>uma</strong> tarefa corretamente.</strong>
+            </div>
+            <div id="scoring-1C-2" class="score-box" onclick="selectScore('scoring-guide-1C', '2')">
+                2 = Não realiza <strong>nenhuma</strong> tarefa corretamente.</strong>
+            </div>
+        </div>
+        <input type="hidden" id="selected-score-1C" name="selected-score-1C" value="">
+    </div>
+
+    <!-- 2: Melhor Olhar Conjugado -->
+    <div id="scoring-guide-2" class="nihss-item">
+        <h3>2. Melhor Olhar Conjugado</h3>
+
+        <div class="instruction-box">
+            <strong>Instruções de Realização:</strong>
+            <p>Solicite que o paciente siga o seu dedo no sentido horizontal.</p>
+            <ul>
+                <li>Teste o reflexo oculocefálico ou estabeleça contato visual se necessário.</li>
+                <li>Neste item, não é preciso considerar apenas a primeira resposta. Caso o paciente não obedeça ao comando na primeira tentativa, realize as manobras alternativas acima.</li>
+                <li>Os pacientes com trauma ou curativo ocular, cegueira pré-existente ou outro distúrbio de acuidade ou campo visual devem ser testados com movimentos reflexos.</li>
+            </ul>
+        </div>
+
+        <h4>Critérios de Avaliação:</h4>
+        <div>
+            <div id="scoring-2-0" class="score-box" onclick="selectScore('scoring-guide-2', '0')">
+                0 = Normal.
+            </div>
+            <div id="scoring-2-1" class="score-box" onclick="selectScore('scoring-guide-2', '1')">
+                1 = <strong>Paralisia parcial</strong> do olhar conjugado, <strong>desvio forçado vencido</strong> por manobras reflexas ou paresia de <strong>III, IV ou VI isolada</strong>.
+            </div>
+            <div id="scoring-2-2" class="score-box" onclick="selectScore('scoring-guide-2', '2')">
+                2 = <strong>Desvio forçado ou paresia total</strong> do olhar conjugado <strong>não revertidos</strong> pela manobra oculocefálica.
+            </div>
+        </div>
+        <input type="hidden" id="selected-score-2" name="selected-score-2" value="">
+    </div>
+
+    <!-- 3: Campos Visuais -->
+    <div id="scoring-guide-3" class="nihss-item">
+        <h3>3. Campos Visuais</h3>
+
+        <div class="instruction-box">
+            <strong>Instruções de Realização:</strong>
+            <p>Realize campimetria por confrontação (contar de dedos ou movimento dos dedos) ou ameaça visual.</p>
+            <ul>
+                <li>Teste os quatro quadrantes em cada olho, de forma independente.</li>
+                <li>Após testar os olhos de forma independente, teste os campos visuais simultaneamente para avaliar a presença de extinção visual.</li>
+                <li>Se houver cegueira unilateral ou enucleação, os campos visuais no olho restante são avaliados.</li>
+                <li>Pontue 1 apenas se houver uma assimetria clara, incluindo quadrantanopsia.</li>
+                <li>Pacientes com campos visuais normais isoladamente, mas com extinção visual, recebem 1 ponto.</li>
+                <li>Pacientes com cegueira bilateral por qualquer causa devem receber 3 pontos.</li>
+            </ul>
+        </div>
+
+        <h4>Critérios de Avaliação:</h4>
+        <div>
+            <div id="scoring-3-0" class="score-box" onclick="selectScore('scoring-guide-3', '0')">
+                0 = Sem déficits campimétricos.
+            </div>
+            <div id="scoring-3-1" class="score-box" onclick="selectScore('scoring-guide-3', '1')">
+                1 = Hemianopsia <strong>parcial</strong> ou <strong>extinção visual</strong>.
+            </div>
+            <div id="scoring-3-2" class="score-box" onclick="selectScore('scoring-guide-3', '2')">
+                2 = Hemianopsia <strong>completa</strong>.
+            </div>
+            <div id="scoring-3-3" class="score-box" onclick="selectScore('scoring-guide-3', '3')">
+                3 = Hemianopsia <strong>bilateral</strong>; <strong>cegueira</strong>, incluindo cegueira cortical.
+            </div>
+        </div>
+        <input type="hidden" id="selected-score-3" name="selected-score-3" value="">
+    </div>
+
+
+    <!-- 4: Paralisia Facial -->
+    <div id="scoring-guide-4" class="nihss-item">
+        <h3>4. Paralisia Facial</h3>
+
+        <div class="instruction-box">
+            <strong>Instruções de Realização:</strong>
+            <p>Solicite que o paciente sorria ou mostre os dentes, feche os olhos e levante as sobrancelhas o máximo que puder</p>
+            <ul>
+                <li>Em caso de pacientes afásicos, comatosos ou incapazes de obedecer a comandos, utilize estímulos dolorosos.</li>
+                <li>Remova barreiras físicas (ex: curativos) que possam dificultar a avaliação.</li>
+            </ul>
+        </div>
+
+        <h4>Critérios de Avaliação:</h4>
+        <div>
+            <div id="scoring-4-0" class="score-box" onclick="selectScore('scoring-guide-4', '0')">
+                0 = Movimentos normais simétricos.
+            </div>
+            <div id="scoring-4-1" class="score-box" onclick="selectScore('scoring-guide-4', '1')">
+                1 = Paralisia facial menor (apagamento do sulco nasolabial, assimetria no sorriso).
+            </div>
+            <div id="scoring-4-2" class="score-box" onclick="selectScore('scoring-guide-4', '2')">
+                2 = Paralisia facial <strong>central evidente</strong> (paralisia facial inferior total ou quase total).
+            </div>
+            <div id="scoring-4-3" class="score-box" onclick="selectScore('scoring-guide-4', '3')">
+                3 = Paralisia facial <strong>completa</strong>. (ausência de movimentos faciais das regiões superior e inferior de um lado da face).
+            </div>
+
+        </div>
+        <input type="hidden" id="selected-score-4" name="selected-score-4" value="">
+    </div>
+
+    <!-- 5A: Força do Membro Superior Não Parético -->
+    <div id="scoring-guide-5A" class="nihss-item">
+        <h3>5A. Força do Membro Superior Não Parético</h3>
+
+        <div class="instruction-box">
+            <strong>Instruções de Realização:</strong>
+            <p>Solicite ao paciente que estenda o membro com a palma da mão para baixo (em 90º se o paciente estiver sentado e em 45º se estiver deitado). Conte até 10 em voz alta e pontue se houver queda do membro antes disso.</p>
+            <ul>
+                <li>Teste cada membro individualmente e sempre comece o teste pelo membro não parético.</li>
+                <li>É permitido ajudar o paciente colocando o membro na posição desejada.</li>
+                <li>Pacientes incapazes de sustentar contra a gravidade devem ser orientados a realizar qualquer tipo de movimento com o membro.</li>
+                <li>Caso o paciente tenha alguma limitação para extensão do membro não relacionada ao AVC, deverá receber uma pontuação da mesma maneira. O grau de limitação deverá ser julgado pelo profissional se está relacionado ao AVC ou não.</li>
+                <li>Marque "NT" apenas em caso de amputação do ombro ou do quadril ou incapacidade de movimentar o membro por algum motivo.</li>
+                <li>Pontue 4 em pacientes comatosos que pontuaram 3 em 1A.</li>
+            </ul>
+        </div>
+
+        <h4>Critérios de Avaliação:</h4>
+        <div>
+            <div id="scoring-5A-0" class="score-box" onclick="selectScore('scoring-guide-5A', '0')">
+                0 = Sem queda; mantém o membro por 10 segundos.
+            </div>
+            <div id="scoring-5A-1" class="score-box" onclick="selectScore('scoring-guide-5A', '1')">
+                1 = <strong>Queda parcial</strong> antes de completar 10 segundos; o membro não toca o leito.
+            </div>
+            <div id="scoring-5A-2" class="score-box" onclick="selectScore('scoring-guide-5A', '2')">
+                2 = Algum <strong>esforço contra a gravidade</strong>; o membro toca o leito antes dos 10 segundos.
+            </div>
+            <div id="scoring-5A-3" class="score-box" onclick="selectScore('scoring-guide-5A', '3')">
+                3 = <strong>Nenhum esforço contra a gravidade</strong>; o membro cai imediatamente, mas faz algum movimento.
+            </div>
+            <div id="scoring-5A-4" class="score-box" onclick="selectScore('scoring-guide-5A', '4')">
+                4 = <strong>Nenhum movimento</strong>.
+            </div>
+            <div id="scoring-5A-NT" class="score-box" onclick="selectScore('scoring-guide-5A', 'NT')">
+                NT = Amputação ou anquilose.
+            </div>
+        </div>
+        <input type="hidden" id="selected-score-5A" name="selected-score-5A" value="">
+    </div>
+
+    <!-- 5B: Força do Membro Superior Parético -->
+    <div id="scoring-guide-5B" class="nihss-item">
+        <h3>5B. Força do Membro Superior Parético</h3>
+
+        <h4>Critérios de Avaliação:</h4>
+        <div>
+            <div id="scoring-5B-0" class="score-box" onclick="selectScore('scoring-guide-5B', '0')">
+                0 = Sem queda; mantém o membro por 10 segundos.
+            </div>
+            <div id="scoring-5B-1" class="score-box" onclick="selectScore('scoring-guide-5B', '1')">
+                1 = <strong>Queda parcial</strong> antes de completar 10 segundos; o membro não toca o leito.
+            </div>
+            <div id="scoring-5B-2" class="score-box" onclick="selectScore('scoring-guide-5B', '2')">
+                2 = Algum <strong>esforço contra a gravidade</strong>; o membro toca o leito antes dos 10 segundos.
+            </div>
+            <div id="scoring-5B-3" class="score-box" onclick="selectScore('scoring-guide-5B', '3')">
+                3 = <strong>Nenhum esforço contra a gravidade</strong>; o membro cai imediatamente, mas faz algum movimento.
+            </div>
+            <div id="scoring-5B-4" class="score-box" onclick="selectScore('scoring-guide-5B', '4')">
+                4 = <strong>Nenhum movimento</strong>.
+            </div>
+            <div id="scoring-5B-NT" class="score-box" onclick="selectScore('scoring-guide-5B', 'NT')">
+                NT = Amputação ou anquilose.
+            </div>
+        </div>
+        <input type="hidden" id="selected-score-5B" name="selected-score-5B" value="">
+    </div>
+
+
+    <!-- 6A: Força do Membro Inferior Não Parético -->
+    <div id="scoring-guide-6A" class="nihss-item">
+        <h3>6A. Força do Membro Inferior Não Parético</h3>
+
+        <div class="instruction-box">
+            <strong>Instruções de Realização:</strong>
+            <p>Com o paciente em decúbito dorsal, solicite que estenda o membro em 30º. Conte até 5 em voz alta e pontue se houver queda do membro antes disso. Seguir as mesmas orientações dadas para os membros superiores.</p>
+        </div>
+
+        <h4>Critérios de Avaliação:</h4>
+        <div>
+            <div id="scoring-6A-0" class="score-box" onclick="selectScore('scoring-guide-6A', '0')">
+                0 = Sem queda; mantém o membro por 5 segundos.
+            </div>
+            <div id="scoring-6A-1" class="score-box" onclick="selectScore('scoring-guide-6A', '1')">
+                1 = <strong>Queda parcial</strong> antes de completar 5 segundos; o membro não toca o leito.
+            </div>
+            <div id="scoring-6A-2" class="score-box" onclick="selectScore('scoring-guide-6A', '2')">
+                2 = Algum <strong>esforço contra a gravidade</strong>; o membro toca o leito antes dos 5 segundos.
+            </div>
+            <div id="scoring-6A-3" class="score-box" onclick="selectScore('scoring-guide-6A', '3')">
+                3 = <strong>Nenhum esforço contra a gravidade</strong>; o membro cai imediatamente, mas faz algum movimento.
+            </div>
+            <div id="scoring-6A-4" class="score-box" onclick="selectScore('scoring-guide-6A', '4')">
+                4 = <strong>Nenhum movimento</strong>.
+            </div>
+            <div id="scoring-6A-NT" class="score-box" onclick="selectScore('scoring-guide-6A', 'NT')">
+                NT = Amputação ou anquilose.
+            </div>
+        </div>
+        <input type="hidden" id="selected-score-6A" name="selected-score-6A" value="">
+    </div>
+
+    <!-- 6B: Força do Membro Inferior Não Parético -->
+    <div id="scoring-guide-6B" class="nihss-item">
+        <h3>6B. Força do Membro Inferior Não Parético</h3>
+
+        <h4>Critérios de Avaliação:</h4>
+        <div>
+            <div id="scoring-6B-0" class="score-box" onclick="selectScore('scoring-guide-6B', '0')">
+                0 = Sem queda; mantém o membro por 5 segundos.
+            </div>
+            <div id="scoring-6B-1" class="score-box" onclick="selectScore('scoring-guide-6B', '1')">
+                1 = <strong>Queda parcial</strong> antes de completar 5 segundos; o membro não toca o leito.
+            </div>
+            <div id="scoring-6B-2" class="score-box" onclick="selectScore('scoring-guide-6B', '2')">
+                2 = Algum <strong>esforço contra a gravidade</strong>; o membro toca o leito antes dos 5 segundos.
+            </div>
+            <div id="scoring-6B-3" class="score-box" onclick="selectScore('scoring-guide-6B', '3')">
+                3 = <strong>Nenhum esforço contra a gravidade</strong>; o membro cai imediatamente, mas faz algum movimento.
+            </div>
+            <div id="scoring-6B-4" class="score-box" onclick="selectScore('scoring-guide-6B', '4')">
+                4 = <strong>Nenhum movimento</strong>.
+            </div>
+            <div id="scoring-6B-NT" class="score-box" onclick="selectScore('scoring-guide-6B', 'NT')">
+                NT = Amputação ou anquilose.
+            </div>
+        </div>
+        <input type="hidden" id="selected-score-6B" name="selected-score-6B" value="">
+    </div>
+
+    <!-- 7: Ataxia de Membros -->
+    <div id="scoring-guide-7" class="nihss-item">
+        <h3>7. Ataxia de Membros</h3>
+
+        <div class="instruction-box">
+            <strong>Instruções de Realização:</strong>
+            <p>Realize os testes de índex-nariz e calcanhar-joelho.</p>
+            <ul>
+                <li>Peça que os movimentos sejam repetidos até que a pontuação seja clara.</li>
+                <li>O paciente deve estar com os olhos abertos.</li>
+                <li>Considere ataxia apenas se for desproporcional à fraqueza muscular.</li>
+                <li>No caso de cegueira, peça para tocar com o dedo no nariz a partir da posição de braço estendido.</li>
+                <li>Pontue 0 em pacientes que não compreendem comandos, estão em coma ou com o membro paralisado.</li>
+                <li>Pontue 0 apenas em caso de amputação do ombro ou do quadril ou incapacidade de movimentar o membro por algum motivo.</li>
+            </ul>
+        </div>
+
+        <h4>Critérios de Avaliação:</h4>
+        <div>
+            <div id="scoring-7-0" class="score-box" onclick="selectScore('scoring-guide-7', '0')">
+                0 = Ausente.
+            </div>
+            <div id="scoring-7-1" class="score-box" onclick="selectScore('scoring-guide-7', '1')">
+                1 = Presente em <strong>1 membro</strong>.
+            </div>
+            <div id="scoring-7-2" class="score-box" onclick="selectScore('scoring-guide-7', '2')">
+                2 = Presente em <strong>2 membros</strong> (ambos membros superiores, ambos membros inferiores ou membro superior e membro inferior do mesmo lado).
+            </div>
+            <div id="scoring-7-NT" class="score-box" onclick="selectScore('scoring-guide-7', 'NT')">
+                NT = Amputação ou anquilose.
+            </div>
+        </div>
+        <input type="hidden" id="selected-score-7" name="selected-score-7" value="">
+    </div>
+
+
+    <!-- 8: Sensibilidade -->
+    <div id="scoring-guide-8" class="nihss-item">
+        <h3>8. Sensibilidade</h3>
+
+        <div class="instruction-box">
+            <strong>Instruções de Realização:</strong>
+            <p>Avalie a sensibilidade ou mímica facial à pontada de um alfinete nos quatro membros (acima do punho, nos membros superiores, e do tornozelo, nos membros inferiores), na face ou no tronco.</p>
+            <ul>
+                <li>Pergunte ao paciente se ele sente o estímulo e se há assimetria entre os lados. Os olhos do paciente não precisam estar fechados.</li>
+                <li>Em pacientes torporosos, comatosos ou afásicos, observe se há assimetria na resposta ao estímulo doloroso.</li>
+                <li>Só a perda de sensibilidade atribuída ao AVC deverá ser pontuada. (Ex.: não pontuar hipoestesia prévia secundária a polineuropatia).</li>
+                <li>Repita quantas vezes for necessário e em outros locais do corpo (face ou tronco) até obter uma resposta confiável.</li>
+                <li>Não testar extremidades (mãos e pés) para que não haja confusão com neuropatias.</li>
+                <li>Evitar ao máximo testar com roupas.</li>
+                <li>Pacientes torporosos ou afásicos, por dificuldade de caracterizar a intensidade da perda sensitiva, possivelmente são pontuados com 0 ou 1.</li>
+                <li>Pontue 2 em pacientes quadriplégicos que não respondem.</li>
+                <li>Pontue 2 em pacientes comatosos que pontuaram 3 em 1A.</li>
+                <li>Jamais marcar este item como NT.</li>
+            </ul>
+        </div>
+            
+        <h4>Critérios de Avaliação:</h4>
+        <div>
+            <div id="scoring-8-0" class="score-box" onclick="selectScore('scoring-guide-8', '0')">
+                0 = Normal; sem perda de sensibilidade.
+            </div>
+            <div id="scoring-8-1" class="score-box" onclick="selectScore('scoring-guide-8', '1')">
+                1 = Perda de sensibilidade <strong>leve a moderada</strong> (o paciente sente menos a pontada ou há uma perda da sensibilidade dolorosa à picada, mas o ele a sente tocar).
+            </div>
+            <div id="scoring-8-2" class="score-box" onclick="selectScore('scoring-guide-8', '2')">
+                2 = Perda da sensibilidade <strong>grave ou total</strong> (o paciente não sente que está sendo tocado) ou perda da sensibilidade bilateral.
+            </div>
+        </div>
+        <input type="hidden" id="selected-score-8" name="selected-score-8" value="">
+    </div>
+
+    <!-- 9: Melhor Linguagem -->
+    <div id="scoring-guide-9" class="nihss-item">
+        <h3>9. Melhor Linguagem</h3>
+
+        <div class="instruction-box">
+            <strong>Instruções de Realização:</strong>
+            <p>Solicite que o paciente descreva uma figura, nomeie objetos e leia frases. As figuras, objetos e frases estão disponíveis abaixo.</p>
+            <ul>
+                <li>A compreensão é julgada a partir destas respostas, assim como as respostas referentes às ordens dadas nos itens precedentes.</li>
+                <li>Se a perda visual interferir com os testes, peça ao doente para identificar objetos colocados na mão, repetir frases e produzir discurso.</li>
+                <li>O examinador deve escolher a pontuação no paciente com estupor ou pouco cooperativo.</li>
+                <li>A pontuação de 3 está reservada a doentes em mutismo e que não cumpram nenhuma ordem simples (mesmo que o mutismo não seja pela afasia).</li>
+                <li>O paciente intubado deve escrever as respostas.</li>
+                <li>Pontue 3 em pacientes comatosos que pontuaram 3 em 1A.</li>
+            </ul>
+        </div>
+
+        <h4>Critérios de Avaliação:</h4>
+        <div>
+            <div id="scoring-9-0" class="score-box" onclick="selectScore('scoring-guide-9', '0')">
+                0 = Sem afasia; normal.
+            </div>
+            <div id="scoring-9-1" class="score-box" onclick="selectScore('scoring-guide-9', '1')">
+                1 = Afasia <strong>leve a moderada</strong>. Perda óbvia de alguma fluência ou dificuldade de compreensão, sem limitação significativa das ideias expressas ou formas de expressão. Contudo, o discurso e/ou compreensão reduzidos dificultam ou impossibilitam a conversação sobre o material fornecido. Por exemplo, na conversa sobre o material fornecido, o <strong>examinador consegue identificar</strong> figuras ou itens da lista de nomeação a partir da resposta do paciente.
+            </div>
+            <div id="scoring-9-2" class="score-box" onclick="selectScore('scoring-guide-9', '2')">
+                2 = Afasia <strong>grave</strong>; toda a comunicação é feita através de <strong>expressões fragmentadas</strong>; necessidade de <strong>interferência, questionamento e adivinhação por parte do examinador</strong>. A quantidade de informação que pode ser trocada é limitada; o examinador assume a maior parte da comunicação; o <strong>examinador não consegue identificar</strong> itens do material fornecido a partir da resposta do paciente.
+            </div>
+            <div id="scoring-9-3" class="score-box" onclick="selectScore('scoring-guide-9', '3')">
+                3 = <strong>Mutismo ou afasia global</strong>; sem discurso ou compreensão verbal minimamente úteis.
+            </div>
+        </div>
+        <input type="hidden" id="selected-score-9" name="selected-score-9" value="">
+    </div>
+
+    <div class="image-container" style="text-align: center; margin-top: 20px;">
+        <img src="imagem.jpg" style="max-width: 100%; height: auto; border: 1px solid #ccc; border-radius: 5px;">
+        <p style="font-size: 14px; color: #555;">Imagem 1: Figura para descrição.</p>
+    </div>
+
+    <div class="image-container" style="text-align: center; margin-top: 20px;">
+        <img src="Lista de figuras.jpg" style="max-width: 100%; height: auto; border: 1px solid #ccc; border-radius: 5px;">
+        <p style="font-size: 14px; color: #555;">Imagem 2: Lista de figuras para nomeação.</p>
+    </div>
+
+    <div class="image-container" style="text-align: center; margin-top: 20px;">
+        <img src="Lista de frases.jpg" style="max-width: 100%; height: auto; border: 1px solid #ccc; border-radius: 5px;">
+        <p style="font-size: 14px; color: #555;">Imagem 3: Lista de frases para leitura.</p>
+    </div>
+
+    <!-- 10: Disartria -->
+    <div id="scoring-guide-10" class="nihss-item">
+        <h3>10. Disartria</h3>
+
+        <div class="instruction-box">
+            <strong>Instruções de Realização:</strong>
+            <p>Se acreditar que o paciente consegue, solicite que leia ou repita as palavras da lista de palavras abaixo.</p>
+            <ul>
+                <li>Se o paciente tem afasia grave, a clareza da articulação da fala espontânea pode ser pontuada.</li>
+                <li>Este item é considerado NT apenas se o doente estiver entubado ou tiver outras barreiras físicas que impeçam o discurso.</li>
+                <li>Não diga ao paciente a razão pela qual está a ser testado.</li>
+                <li>Pontue 1 para pacientes com discurso de difícil interpretação devido a outras causas, mesmo que o não estejam relacionadas ao AVC (ex.: edêntulos).</li>
+                <li>Pontue 2 em pacientes comatosos que pontuaram 3 em 1A.</li>
+            </ul>
+        </div>
+
+        <h4>Critérios de Avaliação:</h4>
+        <div>
+            <div id="scoring-10-0" class="score-box" onclick="selectScore('scoring-guide-10', '0')">
+                0 = Normal.
+            </div>
+            <div id="scoring-10-1" class="score-box" onclick="selectScore('scoring-guide-10', '1')">
+                1 = Disartria <strong>leve a moderada</strong>; doente com voz arrastada, mas, na pior das hipóteses, <strong>pode ser entendido</strong> com alguma dificuldade.
+            </div>
+            <div id="scoring-10-2" class="score-box" onclick="selectScore('scoring-guide-10', '2')">
+                2 = Disartria <strong>grave</strong>; voz do doente é tão arrastada que chega a ser <strong>ininteligível</strong>, desproporcionalmente à disfasia, ou o paciente apresenta mutismo ou anartria.
+            </div>
+            <div id="scoring-10-NT" class="score-box" onclick="selectScore('scoring-guide-10', 'NT')">
+                NT = Impossível avaliar (ex.: intubação).
+            </div>
+        </div>
+        <input type="hidden" id="selected-score-10" name="selected-score-10" value="">
+    </div>
+
+    <div class="image-container" style="text-align: center; margin-top: 20px;">
+        <img src="Lista de palavras.jpg" style="max-width: 100%; height: auto; border: 1px solid #ccc; border-radius: 5px;">
+        <p style="font-size: 14px; color: #555;">Imagem 4: Lista de palavras para repetição.</p>
+    </div>
+
+    <!-- 11: Extinção e Desatenção -->
+    <div id="scoring-guide-11" class="nihss-item">
+        <h3>11. Extinção e Desatenção</h3>
+
+        <div class="instruction-box">
+            <strong>Instruções de Realização:</strong>
+            <p>Avalie presença de negligência visuoespacial ou anosognosia. Realize testes de estimulação simultânea em várias modalidades e pergunte se o paciente reconhece a própria mão.</p>
+            <ul>
+                <li>A informação suficiente para a identificação de negligência pode ter sido obtida durante os testes anteriores.</li>
+                <li>Se o paciente tem afasia e/ou perda visual grave que impede o teste da estimulação visual dupla simultânea e os estímulos cutâneos são normais, a pontuação é normal.</li>
+                <li>Como a anormalidade só é pontuada se presente, o item nunca é considerado NT.</li>
+                <li>Pontue 2 em pacientes comatosos que pontuaram 3 em 1A.</li>
+            </ul>
+        </div>
+
+        <h4>Critérios de Avaliação:</h4>
+        <div>
+            <div id="scoring-11-0" class="score-box" onclick="selectScore('scoring-guide-11', '0')">
+                0 = Nenhuma anormalidade.
+            </div>
+            <div id="scoring-11-1" class="score-box" onclick="selectScore('scoring-guide-11', '1')">
+                1 = Desatenção em <strong>uma das modalidades</strong> (visual, tátil, auditiva, espacial ou pessoal) ou <strong>extinção</strong> à estimulação simultânea em uma das modalidades.
+            </div>
+            <div id="scoring-11-2" class="score-box" onclick="selectScore('scoring-guide-11', '2')">
+                2 = <strong>Profunda hemidesatenção</strong> ou hemidesatenção para <strong>mais de uma modalidade</strong>; <strong>não reconhece a própria mão</strong>; <strong>se orienta apenas para um lado do espaço</strong>.
+            </div>
+        </div>
+        <input type="hidden" id="selected-score-11" name="selected-score-11" value="">
+    </div>
+
+<div id="scoring-summary" class="nihss-item" style="margin-top: 30px;">
+    <h3>Soma Final das Pontuações</h3>
+    <div style="font-size: 18px; margin: 10px 0;">
+        Pontuação Final:
+        <span id="total-score" style="font-weight: bold;">0</span>
+    </div>
+</div>
+
+<!-- Botões -->
+<div class="button-container" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+    <div style="display: flex; gap: 10px;">
+        <button onclick="finalizeTest()" class="finalize-button" style="padding: 10px 15px; font-size: 14px; cursor: pointer;">Finalizar Teste</button>
+        <button onclick="clearLastEntry()" class="clear-last-button" style="padding: 10px 15px; font-size: 14px; cursor: pointer;">Limpar Último Teste</button>
+        <button onclick="clearAllEntries()" class="clear-all-button" style="padding: 10px 15px; font-size: 14px; cursor: pointer;">Limpar Tudo</button>
+        <button onclick="printPage()" class="print-button" style="padding: 10px 15px; font-size: 14px; cursor: pointer;">Imprimir</button>
+    </div>
+</div>
+
+<!-- Tabela de Evolução -->
+<h2 style="text-align: center; margin-top: 20px;">Tabela de Evolução</h2>
+<table id="evolutionTable" border="1" cellspacing="0" cellpadding="5" style="width: 100%; text-align: center;">
+    <thead>
+        <tr>
+            <th>Hora Início</th>
+            <th>Hora Final</th>
+            <th>Pontuação</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Novas linhas serão adicionadas aqui -->
+    </tbody>
+</table>
+
+<footer style="background-color: #f5f5f5; text-align: center; padding: 15px; margin-top: 30px; font-size: 0.9em; color: #555; border-top: 1px solid #ddd;">
+    <p>Desenvolvido por <strong>Welton Cardoso</strong> e <strong>Gustavo Carvalho</strong> - Neurologia - Hospital das Clínicas da UFMG</p>
+    <p>Adaptado da versão oficial da <strong>National Institutes of Health Stroke Scale (NIHSS)</strong></p>
+</footer>
+
+</p>
+
+<script>
+    let startTime = null; // Armazena o horário do início
+    let totalScore = 0; // Armazena a pontuação total
+
+    // Função chamada ao clicar no botão Iniciar Teste
+    function startTest() {
+        startTime = new Date().toLocaleTimeString(); // Salva o horário atual
+        totalScore = 0; // Zera a pontuação inicial
+        clearScores(); // Reseta os itens
+        alert("Teste iniciado às " + startTime);
+    }
+
+// Função chamada ao clicar no botão Finalizar Teste
+function finalizeTest() {
+    if (!startTime) {
+        alert("Por favor, clique em 'Iniciar Teste' primeiro.");
+        return;
+    }
+
+    const endTime = new Date().toLocaleTimeString(); // Salva o horário atual
+    calculateTotalScore(); // Recalcula a pontuação total
+    const scoreText = document.getElementById('total-score').textContent;
+    const score = scoreText.match(/\d+/)[0]; // Extrai apenas o número da pontuação
+
+    // Adiciona uma nova linha à tabela
+    const table = document.getElementById("evolutionTable").querySelector("tbody");
+    const row = table.insertRow();
+    row.insertCell(0).textContent = startTime;
+    row.insertCell(1).textContent = endTime;
+    row.insertCell(2).textContent = score;
+
+    // Reseta o horário de início e pontuação
+    startTime = null;
+    alert("Teste finalizado às " + endTime);
+}
+
+    // Função chamada ao clicar no botão Limpar Último Teste
+    function clearLastEntry() {
+        clearScores(); // Reseta os itens, mas mantém a tabela
+        alert("Itens desmarcados, mas a tabela permanece registrada.");
+    }
+
+    // Função chamada ao clicar no botão Limpar Tudo
+    function clearAllEntries() {
+        clearScores(); // Reseta os itens
+        const table = document.getElementById("evolutionTable").querySelector("tbody");
+        table.innerHTML = ""; // Apaga todas as linhas da tabela
+        alert("Itens desmarcados e tabela apagada.");
+    }
+
+    // Função para limpar os itens (desmarcar seleções)
+    function clearScores() {
+        const scoreInputs = document.querySelectorAll('input[type="hidden"]');
+        scoreInputs.forEach(input => input.value = ""); // Reseta o valor dos inputs
+        const boxes = document.querySelectorAll('.score-box');
+        boxes.forEach(box => box.classList.remove('selected')); // Remove a classe "selected"
+    }
+
+    // Função para imprimir a página
+    function printPage() {
+        window.print();
+    }
+
+// Função para selecionar uma opção em uma seção específica
+function selectScore(sectionId, selectedId) {
+    // Seleciona a seção pelo ID
+    const section = document.getElementById(sectionId);
+
+    // Verifica se a seção existe
+    if (!section) {
+        console.error(`Seção com ID ${sectionId} não encontrada.`);
+        return;
+    }
+
+    // Remove a classe "selected" de todas as opções dentro da seção
+    const boxes = section.querySelectorAll('.score-box');
+    boxes.forEach(box => box.classList.remove('selected'));
+
+    // Adiciona a classe "selected" à opção clicada
+    const selectedBox = section.querySelector(`#scoring-${sectionId.split('-')[2]}-${selectedId}`);
+    if (selectedBox) {
+        selectedBox.classList.add('selected');
+    } else {
+        console.error(`Opção com ID scoring-${sectionId.split('-')[2]}-${selectedId} não encontrada.`);
+    }
+
+    // Atualiza o valor do input oculto correspondente
+    const hiddenInput = section.querySelector('input[type="hidden"]');
+    if (hiddenInput) {
+        hiddenInput.value = selectedId;
+    } else {
+        console.error('Input oculto não encontrado na seção.');
+    }
+}
+
+// Função para calcular a soma das pontuações e exibir o formato solicitado
+function calculateTotalScore() {
+    // Seleciona todos os inputs ocultos que armazenam as pontuações
+    const scoreInputs = document.querySelectorAll('input[type="hidden"]');
+    let total = 0;
+    let details = [];
+
+    // Itera sobre cada input para somar valores e montar o detalhamento
+    scoreInputs.forEach((input, index) => {
+        const value = parseInt(input.value, 10); // Converte o valor para número
+        const sectionName = input.id.split('-')[2]; // Extrai o nome da seção (ex.: "1A", "1B", etc.)
+
+        if (!isNaN(value)) {
+            total += value; // Adiciona à soma total
+            details.push(`${sectionName}: ${value === 0 ? "NT" : value}`); // Marca "NT" se o valor for 0
+        } else {
+            details.push(`${sectionName}: NT`); // Exibe "NT" caso o valor não seja um número válido
+        }
+    });
+
+    // Atualiza a exibição do total e detalhes
+    const totalScoreElement = document.getElementById('total-score');
+    totalScoreElement.textContent = `Pontuação Total: ${total} (${details.join(" -- ")})`;
+}
+
+// Função para calcular a soma das pontuações e exibir o formato solicitado
+function calculateTotalScore() {
+    // Seleciona todos os inputs ocultos que armazenam as pontuações
+    const scoreInputs = document.querySelectorAll('input[type="hidden"]');
+    let total = 0;
+    let details = [];
+
+    // Itera sobre cada input para somar valores e montar o detalhamento
+    scoreInputs.forEach((input, index) => {
+        const value = parseInt(input.value, 10); // Converte o valor para número
+        const sectionName = input.id.split('-')[2]; // Extrai o nome da seção (ex.: "1A", "1B", etc.)
+
+        if (!isNaN(value) && value !== 0) {
+            total += value; // Adiciona à soma total
+            details.push(`${sectionName}: ${value}`); // Adiciona ao detalhamento
+        } else if (value === 0) {
+            details.push(`${sectionName}: NT`); // Marca "NT" se o valor for 0
+        }
+    });
+
+    // Atualiza a exibição do total e detalhes
+    const totalScoreElement = document.getElementById('total-score');
+    if (details.length > 0) {
+        totalScoreElement.textContent = `Pontuação Total: ${total} (${details.join(" -- ")})`;
+    } else {
+        totalScoreElement.textContent = "Pontuação Total: 0";
+    }
+}
+
+// Função para calcular a soma das pontuações e exibir o formato solicitado
+function calculateTotalScore() {
+    // Seleciona todos os inputs ocultos que armazenam as pontuações
+    const scoreInputs = document.querySelectorAll('input[type="hidden"]');
+    let total = 0;
+    let details = [];
+
+    // Itera sobre cada input para somar valores e montar o detalhamento
+    scoreInputs.forEach(input => {
+        const value = parseInt(input.value, 10); // Converte o valor para número
+        const sectionName = input.id.split('-')[2]; // Extrai o nome da seção (ex.: "1A", "1B", etc.)
+
+        if (!isNaN(value)) {
+            // Adiciona à soma total somente se não for "NT" (valor 0 é exibido como "NT")
+            if (value !== 0) {
+                total += value;
+            }
+            // Adiciona ao detalhamento (NT ou valor válido)
+            details.push(`${sectionName}: ${value === 0 ? "NT" : value}`);
+        }
+    });
+
+    // Atualiza a exibição do total e detalhes
+    const totalScoreElement = document.getElementById('total-score');
+    if (details.length > 0) {
+        totalScoreElement.textContent = `Pontuação Total: ${total} (${details.join(" -- ")})`;
+    } else {
+        totalScoreElement.textContent = "Pontuação Total: 0";
+    }
+}
+
+// Função para calcular a soma das pontuações e exibir o formato solicitado
+function calculateTotalScore() {
+    // Seleciona todos os inputs ocultos que armazenam as pontuações
+    const scoreInputs = document.querySelectorAll('input[type="hidden"]');
+    let total = 0;
+    let details = [];
+
+    // Itera sobre cada input para somar valores e montar o detalhamento
+    scoreInputs.forEach(input => {
+        const value = input.value.trim(); // Valor atual do input (como string)
+        const sectionName = input.id.split('-')[2]; // Extrai o nome da seção (ex.: "1A", "1B", etc.)
+
+        if (value !== "") { // Verifica se o item foi marcado
+            if (value === "NT") {
+                details.push(`${sectionName}: NT`); // Adiciona NT ao detalhamento
+            } else {
+                const numericValue = parseInt(value, 10); // Converte para número
+                if (!isNaN(numericValue)) {
+                    total += numericValue; // Soma apenas valores numéricos ao total
+                    details.push(`${sectionName}: ${numericValue}`); // Adiciona valor numérico ao detalhamento
+                }
+            }
+        }
+    });
+
+    // Atualiza a exibição do total e detalhes
+    const totalScoreElement = document.getElementById('total-score');
+    if (details.length > 0) {
+        totalScoreElement.textContent = `Pontuação Total: ${total} (${details.join(" -- ")})`;
+    } else {
+        totalScoreElement.textContent = "Pontuação Total: 0";
+    }
+}
+
+// Função para selecionar uma opção em uma seção específica
+function selectScore(sectionId, selectedId) {
+    // Seleciona a seção pelo ID
+    const section = document.getElementById(sectionId);
+
+    // Verifica se a seção existe
+    if (!section) {
+        console.error(`Seção com ID ${sectionId} não encontrada.`);
+        return;
+    }
+
+    // Remove a classe "selected" de todas as opções dentro da seção
+    const boxes = section.querySelectorAll('.score-box');
+    boxes.forEach(box => box.classList.remove('selected'));
+
+    // Adiciona a classe "selected" à opção clicada
+    const selectedBox = section.querySelector(`#scoring-${sectionId.split('-')[2]}-${selectedId}`);
+    if (selectedBox) {
+        selectedBox.classList.add('selected');
+    } else {
+        console.error(`Opção com ID scoring-${sectionId.split('-')[2]}-${selectedId} não encontrada.`);
+    }
+
+    // Atualiza o valor do input oculto correspondente
+    const hiddenInput = section.querySelector('input[type="hidden"]');
+    if (hiddenInput) {
+        // Define "NT" ou o valor da pontuação com base na seleção
+        if (selectedId === "NT") {
+            hiddenInput.value = "NT";
+        } else {
+            hiddenInput.value = selectedId; // Define o valor da pontuação
+        }
+    } else {
+        console.error('Input oculto não encontrado na seção.');
+    }
+
+    // Recalcula a pontuação total e atualiza o detalhamento
+    calculateTotalScore();
+}
+
+// Funções adicionais (opcionais) para resetar ou manipular os valores
+function clearScores() {
+    // Zera todos os valores dos inputs ocultos
+    const scoreInputs = document.querySelectorAll('input[type="hidden"]');
+    scoreInputs.forEach(input => input.value = "0");
+
+    // Remove a classe "selected" de todas as opções
+    const boxes = document.querySelectorAll('.score-box');
+    boxes.forEach(box => box.classList.remove('selected'));
+
+    // Recalcula a pontuação total
+    calculateTotalScore();
+}
+
+    function calculaIdade() {
+        const dataNascimento = document.getElementById('dataNascimento').value;
+        const idadeCampo = document.getElementById('idade');
+
+        if (dataNascimento) {
+            const hoje = new Date();
+            const nascimento = new Date(dataNascimento);
+
+            let idade = hoje.getFullYear() - nascimento.getFullYear();
+            const mesAtual = hoje.getMonth();
+            const diaAtual = hoje.getDate();
+
+            // Ajusta a idade se o aniversário não ocorreu este ano
+            if (
+                mesAtual < nascimento.getMonth() || 
+                (mesAtual === nascimento.getMonth() && diaAtual < nascimento.getDate())
+            ) {
+                idade--;
+            }
+
+            idadeCampo.value = idade; // Atualiza o campo "Idade"
+        } else {
+            idadeCampo.value = ''; // Limpa o campo se a data estiver vazia
+        }
+    }
+</script>
+</body>
+</html>
+
+    </div>
+
+    <!-- Conteúdo da segunda aba -->
+<div id="tab2" class="tab-content">
+    <h2>Lista de Contraindicações à Trombólise</h2>
+
+    <!-- História Clínica -->
+    <div class="contra-box">
+        <h3>História clínica:</h3>
+        <div class="score-box" onclick="toggleSelection(this)">
+            Tempo em que o paciente foi visto bem pela última vez (hora do ictus) maior do que 4,5 horas ou desconhecido.
+        </div>
+        <div class="score-box" onclick="toggleSelection(this)">
+            NIHSS 0-5 e/ou déficit não incapacitante.
+        </div>
+        <div class="score-box" onclick="toggleSelection(this)">
+            Regiões extensas e óbvias de hipoatenuação.
+        </div>
+        <div class="score-box" onclick="toggleSelection(this)">
+            Regiões extensas e óbvias de hipoatenuação.
+            <div class="instruction-box" style="margin-left: 20px; background-color: #f0f0f0; border-left: 5px solid #a9a9a9;">
+            <p><strong>Obs.:</strong> Esses pacientes têm um prognóstico ruim e a hipodensidade evidente representa lesão irreversível. Todavia, não há evidência suficiente para identificar um limiar de gravidade ou extensão de hipoatenuação que afete a resposta ao tratamento com alteplase.</p>
+        </div>
+        </div>
+        <div class="score-box" onclick="toggleSelection(this)">
+            Evidência de hemorragia intracraniana aguda na TC.
+        </div>
+        <div class="score-box" onclick="toggleSelection(this)">
+            TCE agudo com AVC isquêmico pós-traumático.
+        </div>
+        <div class="score-box" onclick="toggleSelection(this)">
+            Sinais e sintomas consistentes com hemorragia subaracnoide.
+        </div>
+        <div class="score-box" onclick="toggleSelection(this)">
+            Sinais e sintomas consistentes com endocardite infecciosa.
+        </div>
+        <div class="score-box" onclick="toggleSelection(this)">
+            Caso suspeito ou confirmado de dissecção do arco aórtico.
+        </div>
+        <div class="score-box" onclick="toggleSelection(this)">
+            Elevação persistente da pressão arterial (sistólica ≥185 mmHg e/ou diastólica ≥110 mmHg).
+        </div>
+        <div class="score-box" onclick="toggleSelection(this)">
+            Sangramento interno ativo ou diátese hemorrágica aguda.
+        </div>
+    </div>
+
+    <!-- História Pregressa -->
+    <div class="contra-box">
+        <h3>História pregressa:</h3>
+        <div class="score-box" onclick="toggleSelection(this)">Neoplasia intracraniana intra-axial.</div>
+        <div class="score-box" onclick="toggleSelection(this)">Histórico de hemorragia intracraniana.</div>
+        <div class="score-box" onclick="toggleSelection(this)">AVC isquêmico nos últimos 3 meses.</div>
+        <div class="score-box" onclick="toggleSelection(this)">TCE grave nos últimos 3 meses.</div>
+        <div class="score-box" onclick="toggleSelection(this)">Cirurgia intracraniana/espinhal nos últimos 3 meses.</div>
+        <div class="score-box" onclick="toggleSelection(this)">Malignidade gastrointestinal (GI).</div>
+        <div class="score-box" onclick="toggleSelection(this)">Sangramento GI nos últimos 21 dias.</div>
+    </div>
+
+    <!-- Medicamentos -->
+    <div class="contra-box">
+        <h3>Medicamentos:</h3>
+        <div class="score-box" onclick="toggleSelection(this)">
+            Uso de Heparina de baixo peso molecular (HBPM) em dose terapêutica nas últimas 24 horas.
+        </div>
+        <div class="score-box" onclick="toggleSelection(this)">
+            Uso de inibidores de trombina (Dabigatrana) ou fator Xa (Rivaroxabana, Apixabana, Edoxabana) nas últimas 48 horas em pacientes com função renal normal.
+            <div class="instruction-box" style="margin-left: 20px; background-color: #f0f0f0; border-left: 5px solid #a9a9a9;">
+                <p><strong>Obs.:</strong> A infusão de alteplase IV pode ser aventada caso testes laboratoriais, como aPTT, INR ou tempo de trombina confirmem segurança.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Exames Complementares -->
+    <div class="contra-box">
+        <h3>Exames complementares:</h3>
+        <div class="score-box" onclick="toggleSelection(this)">
+            Plaquetas &lt;100.000/mm³, INR &gt;1,7, aPTT &gt;40 s, ou PT &gt;15 s.
+            <div class="instruction-box" style="margin-left: 20px; background-color: #f0f0f0; border-left: 5px solid #a9a9a9;">
+            <p><strong>Obs.:</strong> Não deve-se aguardar resultados de exames laboratoriais para realização da alteplase IV, o dado é válido apenas se o paciente apresentar histórico de trombocitopenia ou de uso recente de anticoagulantes.</p>
+            <p>Em pacientes sem histórico de trombocitopenia, o tratamento pode ser iniciado antes da disponibilidade do resultado das plaquetas, mas deve ser interrompido se <100.000/mm³.</p>
+            <p>Em pacientes sem uso recente de anticoagulantes ou heparina, alteplase pode ser iniciada antes da disponibilidade de testes de coagulação, mas deve ser interrompida se INR >1,7 ou PT anormalmente elevado.</p>
+        </div>
+    </div>
+    </div>
+
+    <!-- Lista de Alertas -->
+    <div class="contra-box">
+        <h3>Lista de alertas:</h3>
+            <div class="instruction-box">
+                <p>Com consideração cuidadosa e avaliação de riscos e benefícios, os pacientes podem receber alteplase IV apesar da presença de um ou mais alertas.</p>
+            </div>
+        <div class="score-box" onclick="toggleSelection(this)">Sinais neurológicos menores e isolados ou sintomas que melhoram rapidamente.</div>
+        <div class="score-box" onclick="toggleSelection(this)">Glicemia sérica &lt;50 mg/dL.
+            <div class="instruction-box" style="margin-left: 20px; background-color: #f0f0f0; border-left: 5px solid #a9a9a9;">
+                <p><strong>Obs.:</strong> Pacientes podem ser tratados com trombólise intravenosa se o nível de glicose for normalizado posteriormente.</p>
+            </div>
+        </div>
+        <div class="score-box" onclick="toggleSelection(this)">Trauma grave ou cirurgia de grande porte nos últimos 14 dias.
+            <div class="instruction-box" style="margin-left: 20px; background-color: #f0f0f0; border-left: 5px solid #a9a9a9;">
+                <p><strong>Obs.:</strong> Os riscos potenciais de sangramento com tPA devido a lesões relacionadas ao trauma devem ser ponderados em relação aos benefícios previstos na redução dos déficits neurológicos relacionados ao AVC.</p>
+            </div>
+        </div>
+        <div class="score-box" onclick="toggleSelection(this)">Histórico de sangramento gastrointestinal (antigo) ou geniturinário.</div>
+        <div class="score-box" onclick="toggleSelection(this)">
+            Crise convulsiva no início do AVC com comprometimentos neurológicos pós-ictais.
+            <div class="instruction-box" style="margin-left: 20px; background-color: #f0f0f0; border-left: 5px solid #a9a9a9;">
+                <p><strong>Obs.:</strong> A trombólise é razoável em pacientes com convulsão no início do AVC se houver evidências que sugiram que os comprometimentos residuais sejam secundários ao AVC isquêmico agudo e não a um fenômeno pós-ictal.</p>
+            </div>
+        </div>
+        <div class="score-box" onclick="toggleSelection(this)">Gravidez.
+            <div class="instruction-box" style="margin-left: 20px; background-color: #f0f0f0; border-left: 5px solid #a9a9a9;">
+                <p><strong>Obs.:</strong> tPA pode ser administrado durante a gravidez quando os benefícios previstos de tratar um AVC moderado ou grave superarem os riscos previstos de aumento de sangramento uterino.</p>
+            </div>
+        </div>
+        <div class="score-box" onclick="toggleSelection(this)">Punção arterial em local não compressível nos últimos sete dias.</div>
+        <div class="score-box" onclick="toggleSelection(this)">Aneurisma intracraniano grande (≥10 mm), não tratado e não roto.</div>
+        <div class="score-box" onclick="toggleSelection(this)">Malformação vascular intracraniana não tratada.</div>
+    </div>
+
+    <!-- Observações-->
+    <div class="contra-box">
+        <h3>Pacientes que <strong>devem ser considerados</strong> elegíveis para trombólise:</h3>
+        <ul>
+            <li>Ictus entre 3 a 4,5 horas e idade &gt;80 anos.</li>
+            <li>Ictus entre 3 a 4,5 horas e uso de Varfarina e com INR &lt;1,7.</li>
+            <li>Ictus entre 3 a 4,5 horas e AVCi grave (NIHSS &gt;25).</li>
+            <li>Ictus entre 3 a 4,5 horas e combinação de história prévia de AVCi e de diabetes mellitus.</li>
+            <li>Incapacidade ou demência previamente ao AVCi atual, apesar de as situações apresentarem menor melhora neurológica. Dessa forma, as decisões devem levar em consideração fatores relevantes, incluindo qualidade de vida, suporte social, local de residência, necessidade de um cuidador, preferências dos pacientes e familiares, e os objetivos do cuidado.</li>
+            <li>Pacientes que apresentam um AVC isquêmico moderado a grave e demonstram melhora precoce, mas permanecem com comprometimento moderado e potencialmente incapacitante, segundo o julgamento do examinador.</li>
+            <li>Pacientes com apresentação sugestiva ou confirmada de dissecção de vasos cervicais extracranianos, desde que não haja suspeita ou confirmação de dissecção de aorta torácica.</li>
+            <li>Submetidos à punção lombar nos últimos 7 dias.</li>
+            <li>Portadores de aneurismas &lt;10mm.</li>
+            <li>Portadores de pequena quantidade de microssangramentos crônicos (1-10) em exame prévio.</li>
+            <li>Portadores de neoplasias intracranianas extra-axiais(ex.: meningiomas).</li>
+            <li>Pacientes que se apresentam concomitantemente com IAM e AVCi. Nestes casos, administrar alteplase na dose adequada para o AVCi.</li>
+            <li>Histórico recente de IAM (com ou sem supra do segmento ST).</li>
+            <li>Pacientes com AVCi após procedimentos endovasculares cerebrais ou cardíacos.</li>
+            <li>Portadores de neoplasia maligna com expectativa de vida &gt;6 meses caso não haja outras contraindicações, como uso de anticoagulantes, cirurgias recentes e sangramento GI, entre outras.</li>
+            <li>Portadores de anemia falciforme.</li>
+            <li>Presença do sinal da artéria cerebral média hiperdensa na TC de crânio.</li>
+            <li>Pacientes com AVCi possivelmente secundários ao uso de drogas ilícitas.</li>
+            <li>No caso de "stroke mimics", o risco de transformação hemorrágica após trombólise é baixo. Portanto, iniciar alteplase é provavelmente recomendado em preferência a atrasar o tratamento para realizar testes diagnósticos adicionais.</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    function toggleSelection(element) {
+        // Alterna a classe "selected" no elemento clicado
+        if (element.classList.contains('selected')) {
+            element.classList.remove('selected'); // Remove a classe "selected"
+        } else {
+            element.classList.add('selected'); // Adiciona a classe "selected"
+        }
+    }
+</script>
+
+</script>
+
+    <!-- Script para alternar abas -->
+    <script>
+        function openTab(tabId) {
+            // Remove a classe "active" de todas as abas e conteúdos
+            const tabs = document.querySelectorAll('.tab');
+            const contents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => tab.classList.remove('active'));
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Adiciona "active" apenas à aba e ao conteúdo selecionado
+            document.querySelector(`.tab[onclick="openTab('${tabId}')"]`).classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
